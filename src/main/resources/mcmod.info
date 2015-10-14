@@ -1,0 +1,16 @@
+[
+{
+  "modid": "Testerino",
+  "name": "Testerino",
+  "description": "A mod made for testing out new ideas.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["MrComputerGhost"],
+  "credits": "MrComputerGhost",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
