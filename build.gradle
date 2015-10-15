@@ -10,14 +10,14 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
-    dependencies {
+    dependencies {  
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
 apply plugin: 'forge'
 
-version = "0.01-beta"
+version = "0.02-beta"
 group= "mrcomputerghost.testerino" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Testerino"
 

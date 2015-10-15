@@ -119,13 +119,15 @@ public class BetterSchematic {
         }
     }
 
-    public void generateInWorld(World world, ChunkCoordinates coords) {
+    public void generateInWorld(World world, ChunkCoordinates coords, boolean ignoreAir) {
         int i = 0;
         for (int z = coords.posZ; z <= length + coords.posZ; ++z) {
             for (int y = coords.posY; y <= height + coords.posY; ++y) {
                 for (int x = coords.posX; x <= width + coords.posX; ++x) {
                     String[] s = key.getString(String.valueOf(blocks[i])).split(":");
-                    world.setBlock(x, y, z, GameRegistry.findBlock(s[0], s[1]), meta[i], 2);
+                    if (!(s[1].equals("air") && ignoreAir)) {
+                        world.setBlock(x, y, z, GameRegistry.findBlock(s[0], s[1]), meta[i], 2);
+                    }
                     ++i;
                 }
             }
@@ -137,10 +139,12 @@ public class BetterSchematic {
             t.setInteger("y", coords.posY + t.getInteger("y"));
             t.setInteger("z", coords.posZ + t.getInteger("z"));
             TileEntity te = world.getTileEntity(t.getInteger("x"), t.getInteger("y"), t.getInteger("z"));
-            te.readFromNBT(t);
-            if (t.hasKey("dungeonLoot")) {
-                Random rand = new Random();
-                WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(t.getString("dungeonLoot"), rand), (IInventory) te, ChestGenHooks.getCount(t.getString("dungeonLoot"), rand));
+            if (te != null) {
+                te.readFromNBT(t);
+                if (t.hasKey("dungeonLoot")) {
+                    Random rand = new Random();
+                    WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(t.getString("dungeonLoot"), rand), (IInventory) te, ChestGenHooks.getCount(t.getString("dungeonLoot"), rand));
+                }
             }
         }
     }

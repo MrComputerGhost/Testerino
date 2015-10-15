@@ -27,6 +27,8 @@ public class CommandExport extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) {
         if (args.length < 7) {
             throw new WrongUsageException("/export <x1> <y1> <z1> <x2> <y2> <z2> <name>");
+        } else if (Integer.parseInt(args[0]) > Integer.parseInt(args[3]) || Integer.parseInt(args[1]) > Integer.parseInt(args[4]) || Integer.parseInt(args[2]) > Integer.parseInt(args[5])) {
+            throw new WrongUsageException("The second set of coordinates must be greater than or equal to the original set!");
         } else {
             StructureBoundingBox box = new StructureBoundingBox(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]));
             BetterSchematic bs = BetterSchematic.genBetterSchematicFromWorld(sender.getEntityWorld(), box);

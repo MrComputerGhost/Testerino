@@ -29,7 +29,7 @@ public class CommandImport extends CommandBase {
             throw new WrongUsageException("/import <x> <y> <z> <name>");
         } else {
             BetterSchematic bs = BetterSchematic.genBetterSchematicFromFile(new File((File) FMLInjectionData.data()[6], "/Structures/" + args[3] + ".nbt"));
-            bs.generateInWorld(sender.getEntityWorld(), new ChunkCoordinates(Integer.parseInt(args[0]), Integer.parseInt(args[1]), (Integer.parseInt(args[2]))));
+            bs.generateInWorld(sender.getEntityWorld(), new ChunkCoordinates(Integer.parseInt(args[0]), Integer.parseInt(args[1]), (Integer.parseInt(args[2]))), false);
             sender.addChatMessage(new ChatComponentText("Imported Structure"));
         }
     }
