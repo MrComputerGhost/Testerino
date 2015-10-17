@@ -20,16 +20,16 @@ public class CommandImport extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender p_71518_1_) {
-        return "/import <x> <y> <z> <name>";
+        return "/import <x> <y> <z> <name> <ignoreAir:true|false>";
     }
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
-        if (args.length < 4) {
-            throw new WrongUsageException("/import <x> <y> <z> <name>");
+        if (args.length < 5) {
+            throw new WrongUsageException("/import <x> <y> <z> <name> <ignoreAir:true|false>");
         } else {
             BetterSchematic bs = BetterSchematic.genBetterSchematicFromFile(new File((File) FMLInjectionData.data()[6], "/Structures/" + args[3] + ".nbt"));
-            bs.generateInWorld(sender.getEntityWorld(), new ChunkCoordinates(Integer.parseInt(args[0]), Integer.parseInt(args[1]), (Integer.parseInt(args[2]))), false);
+            bs.generateInWorld(sender.getEntityWorld(), new ChunkCoordinates(Integer.parseInt(args[0]), Integer.parseInt(args[1]), (Integer.parseInt(args[2]))), Boolean.parseBoolean(args[4]));
             sender.addChatMessage(new ChatComponentText("Imported Structure"));
         }
     }
