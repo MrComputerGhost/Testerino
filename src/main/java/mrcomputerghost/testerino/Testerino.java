@@ -7,6 +7,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import mrcomputerghost.testerino.blocks.TesterinoBlocks;
 import mrcomputerghost.testerino.commands.CommandExport;
 import mrcomputerghost.testerino.commands.CommandImport;
 import mrcomputerghost.testerino.json.StructureManager;
@@ -27,6 +28,8 @@ public class Testerino {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        TesterinoBlocks.initBlocks();
+
         StructureManager.findStructureJSONs();
     }
 

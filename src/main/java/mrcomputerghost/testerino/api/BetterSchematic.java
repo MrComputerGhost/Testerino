@@ -125,7 +125,11 @@ public class BetterSchematic {
             for (int y = coords.posY; y <= height + coords.posY; ++y) {
                 for (int x = coords.posX; x <= width + coords.posX; ++x) {
                     String[] s = key.getString(String.valueOf(blocks[i])).split(":");
-                    if (!(s[1].equals("air") && ignoreAir)) {
+                    if (s[1].toLowerCase().endsWith("air") && ignoreAir) {
+                        if (s[1].toLowerCase().equals("fakeair")) {
+                            world.setBlockToAir(x, y, z);
+                        }
+                    } else {
                         world.setBlock(x, y, z, GameRegistry.findBlock(s[0], s[1]), meta[i], 2);
                     }
                     ++i;
