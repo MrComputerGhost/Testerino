@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -147,7 +148,12 @@ public class BetterSchematic {
                 te.readFromNBT(t);
                 if (t.hasKey("dungeonLoot")) {
                     Random rand = new Random();
-                    WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(t.getString("dungeonLoot"), rand), (IInventory) te, ChestGenHooks.getCount(t.getString("dungeonLoot"), rand));
+                    if (te instanceof IInventory) {
+                        WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(t.getString("dungeonLoot"), rand), (IInventory) te, ChestGenHooks.getCount(t.getString("dungeonLoot"), rand));
+                    }
+                    if (te instanceof TileEntityChest) {
+                        ((TileEntityChest) te).adjacentChestChecked = true;
+                    }
                 }
             }
         }

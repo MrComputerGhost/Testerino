@@ -3,7 +3,7 @@ package mrcomputerghost.testerino.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import cpw.mods.fml.relauncher.FMLInjectionData;
-import mrcomputerghost.testerino.world.structure.Structure;
+import mrcomputerghost.testerino.world.gen.structure.Structure;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,11 +15,11 @@ public class StructureManager {
     public static ArrayList<Structure> structures = new ArrayList<Structure>();
 
     public static void findStructureJSONs() {
-        File structureFolder = new File((File) FMLInjectionData.data()[6],"StructureGen/");
+        File structureFolder = new File((File) FMLInjectionData.data()[6], "StructureGen/");
         if (!structureFolder.exists()) {
             structureFolder.mkdir();
         }
-        if (structureFolder.listFiles() != null)  {
+        if (structureFolder.listFiles() != null) {
             for (File f : structureFolder.listFiles()) {
                 if (f != null && f.getName().endsWith(".json")) {
                     GsonBuilder builder = new GsonBuilder();

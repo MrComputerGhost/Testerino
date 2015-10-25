@@ -8,15 +8,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mrcomputerghost.testerino.blocks.TesterinoBlocks;
+import mrcomputerghost.testerino.commands.CommandConvert;
 import mrcomputerghost.testerino.commands.CommandExport;
 import mrcomputerghost.testerino.commands.CommandImport;
 import mrcomputerghost.testerino.json.StructureManager;
 import mrcomputerghost.testerino.proxy.CommonProxy;
 import mrcomputerghost.testerino.world.gen.StructureGenerator;
-import mrcomputerghost.testerino.world.structure.Structure;
-import net.minecraftforge.common.MinecraftForge;
+import mrcomputerghost.testerino.world.gen.structure.Structure;
 
-@Mod(modid = "Testerino", name = "Testerino", version = "0.02-beta")
+@Mod(modid = "Testerino", name = "Testerino", version = "0.03-beta")
 public class Testerino {
 
     @Mod.Instance
@@ -28,6 +28,7 @@ public class Testerino {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
         TesterinoBlocks.initBlocks();
 
         StructureManager.findStructureJSONs();
@@ -49,6 +50,7 @@ public class Testerino {
     public void serverStart(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandExport());
         event.registerServerCommand(new CommandImport());
+        event.registerServerCommand(new CommandConvert());
     }
 
 }

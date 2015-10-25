@@ -3,7 +3,7 @@ package mrcomputerghost.testerino.world.gen;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.relauncher.FMLInjectionData;
 import mrcomputerghost.testerino.api.BetterSchematic;
-import mrcomputerghost.testerino.world.structure.Structure;
+import mrcomputerghost.testerino.world.gen.structure.Structure;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;

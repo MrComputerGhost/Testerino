@@ -1,6 +1,4 @@
-package mrcomputerghost.testerino.world.structure;
-
-import net.minecraft.world.biome.BiomeGenBase;
+package mrcomputerghost.testerino.world.gen.structure;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package mrcomputerghost.testerino.json;
 
 import com.google.gson.*;
-import mrcomputerghost.testerino.world.structure.Structure;
+import mrcomputerghost.testerino.world.gen.structure.Structure;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
