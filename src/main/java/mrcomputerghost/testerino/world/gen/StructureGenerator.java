@@ -21,17 +21,23 @@ public class StructureGenerator implements IWorldGenerator {
 
     @Override
     public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        if (structure.safeBiomeIds.contains(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeID)) {
-            int x = chunkX * 16;
-            int z = chunkZ * 16;
-            if (structure.dimensions.contains(world.provider.dimensionId)) {
-                if (rand.nextInt(structure.rarity) == 0) {
-                    int y = structure.minLevel + rand.nextInt(structure.maxLevel - structure.minLevel);
+        int x = chunkX * 16;
+        int z = chunkZ * 16;
+        if (structure.dimensions.contains(world.provider.dimensionId)) {
+            if (structure.useExactCoords) {
+                if (Math.abs(structure.coordX - x) < 16 && Math.abs(structure.coordZ - z) < 16) {
                     BetterSchematic struct = BetterSchematic.genBetterSchematicFromFile(new File((File) FMLInjectionData.data()[6], "/Structures/" + structure.structureName + ".nbt"));
-                    struct.generateInWorld(world, new ChunkCoordinates(x, y, z), structure.ignoreAir);
+                    struct.generateInWorld(world, new ChunkCoordinates(structure.coordX, structure.coordY, structure.coordZ), structure.ignoreAir);
+                }
+            } else {
+                if (structure.safeBiomeIds.contains(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16).biomeID)) {
+                    if (rand.nextInt(structure.rarity) == 0) {
+                        int y = structure.minLevel + rand.nextInt(structure.maxLevel - structure.minLevel);
+                        BetterSchematic struct = BetterSchematic.genBetterSchematicFromFile(new File((File) FMLInjectionData.data()[6], "/Structures/" + structure.structureName + ".nbt"));
+                        struct.generateInWorld(world, new ChunkCoordinates(x, y, z), structure.ignoreAir);
+                    }
                 }
             }
         }
     }
-
 }
