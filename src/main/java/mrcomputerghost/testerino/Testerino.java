@@ -16,7 +16,7 @@ import mrcomputerghost.testerino.proxy.CommonProxy;
 import mrcomputerghost.testerino.world.gen.StructureGenerator;
 import mrcomputerghost.testerino.world.gen.structure.Structure;
 
-@Mod(modid = "Testerino", name = "Testerino", version = "0.03-beta")
+@Mod(modid = "Testerino", name = "Testerino", version = "0.04")
 public class Testerino {
 
     @Mod.Instance
