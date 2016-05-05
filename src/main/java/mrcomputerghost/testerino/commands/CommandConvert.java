@@ -1,8 +1,6 @@
 package mrcomputerghost.testerino.commands;
 
 import com.google.common.primitives.Ints;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.FMLInjectionData;
 import mrcomputerghost.testerino.api.BetterSchematic;
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
@@ -11,14 +9,15 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentText;
-import org.apache.commons.lang3.ArrayUtils;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CommandConvert extends CommandBase {
@@ -28,17 +27,25 @@ public class CommandConvert extends CommandBase {
         return "convert";
     }
 
+    public int getRequiredPermissionLevel() {
+        return 2;
+    }
+
     @Override
     public String getCommandUsage(ICommandSender p_71518_1_) {
         return "convert <Input Schematic File> <Export Better Schematic File>\nTo access your minecraft directory, use '$mcDir/'";
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
         BetterSchematic bs = null;
-        File input = new File(args[0].replace("$mcDir", ((File)FMLInjectionData.data()[6]).getAbsolutePath()));
+        File input = new File(args[0].replace("$mcDir", ((File) FMLInjectionData.data()[6]).getAbsolutePath()));
         if (!input.exists()) {
-            throw new WrongUsageException("Make sure the file you are looking for exists!");
+            try {
+                throw new WrongUsageException("Make sure the file you are looking for exists!");
+            } catch (WrongUsageException e) {
+                e.printStackTrace();
+            }
         } else {
             try {
                 NBTTagCompound schematic = CompressedStreamTools.readCompressed(new FileInputStream(input));
@@ -52,7 +59,7 @@ public class CommandConvert extends CommandBase {
                 List<Integer> newBlocks = new ArrayList<Integer>();
                 for (byte block : blocks) {
                     Block b = Block.getBlockById((int) block);
-                    String s = GameRegistry.findUniqueIdentifierFor(b).toString();
+                    String s = ForgeRegistries.BLOCKS.getKey(b).toString();
                     if (!nameID.contains(s)) {
                         nameID.add(s);
                     }
@@ -64,15 +71,15 @@ public class CommandConvert extends CommandBase {
                 }
                 List<Integer> meta = new ArrayList<Integer>();
                 for (byte b : data) {
-                    meta.add((int)b);
+                    meta.add((int) b);
                 }
                 bs = new BetterSchematic(height, length, width, Ints.toArray(newBlocks), Ints.toArray(meta), key, tiles);
-                bs.writeToFile(new File(args[1].replace("$mcDir", ((File)FMLInjectionData.data()[6]).getAbsolutePath())));
+                bs.writeToFile(new File(args[1].replace("$mcDir", ((File) FMLInjectionData.data()[6]).getAbsolutePath())));
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
             }
-            sender.addChatMessage(new ChatComponentText("Converted Schematic to Better Schematic"));
+            sender.addChatMessage(new TextComponentString("Converted Schematic to Better Schematic"));
         }
     }
 

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "testerino:fakeAir"
+    },
+    "inventory": {
+      "model": "testerino:fakeAir"
+    }
+  }
+}

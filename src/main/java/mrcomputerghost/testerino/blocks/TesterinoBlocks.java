@@ -1,24 +1,22 @@
 package mrcomputerghost.testerino.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-
-import java.util.ArrayList;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TesterinoBlocks {
-
-    public static ArrayList<Block> blocks = new ArrayList<Block>();
 
     public static Block fakeAir;
 
     public static void initBlocks() {
 
-        fakeAir = new BlockFakeAir();
+        fakeAir = register(new BlockFakeAir());
+    }
 
-        for (Block block : blocks) {
-            GameRegistry.registerBlock(block, block.getUnlocalizedName());
-        }
-
+    private static Block register(Block block) {
+        GameRegistry.register(block);
+        GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        return block;
     }
 
 }

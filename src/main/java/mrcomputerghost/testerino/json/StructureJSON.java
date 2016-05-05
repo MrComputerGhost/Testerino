@@ -37,9 +37,9 @@ public class StructureJSON implements JsonDeserializer<Structure> {
 
         final JsonArray biomes = obj.getAsJsonArray("spawnBiomeIds");
 
-        ArrayList<Integer> biomeList = new ArrayList<Integer>();
+        ArrayList<String> biomeList = new ArrayList<String>();
         for (JsonElement element : biomes) {
-            biomeList.add(element.getAsInt());
+            biomeList.add(element.getAsString());
         }
 
 

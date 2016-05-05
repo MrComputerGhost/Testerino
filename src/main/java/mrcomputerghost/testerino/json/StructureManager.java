@@ -2,8 +2,8 @@ package mrcomputerghost.testerino.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import cpw.mods.fml.relauncher.FMLInjectionData;
 import mrcomputerghost.testerino.world.gen.structure.Structure;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,12 +1,5 @@
 package mrcomputerghost.testerino;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import mrcomputerghost.testerino.blocks.TesterinoBlocks;
 import mrcomputerghost.testerino.commands.CommandConvert;
 import mrcomputerghost.testerino.commands.CommandExport;
@@ -15,8 +8,15 @@ import mrcomputerghost.testerino.json.StructureManager;
 import mrcomputerghost.testerino.proxy.CommonProxy;
 import mrcomputerghost.testerino.world.gen.StructureGenerator;
 import mrcomputerghost.testerino.world.gen.structure.Structure;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = "Testerino", name = "Testerino", version = "0.04")
+@Mod(modid = "Testerino", name = "Testerino", version = "1.0")
 public class Testerino {
 
     @Mod.Instance
@@ -36,6 +36,8 @@ public class Testerino {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        proxy.init();
+
         for (Structure s : StructureManager.structures) {
             GameRegistry.registerWorldGenerator(new StructureGenerator(s), 15);
         }
