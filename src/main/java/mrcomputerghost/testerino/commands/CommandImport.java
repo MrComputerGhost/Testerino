@@ -5,9 +5,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import java.io.File;
@@ -30,7 +29,7 @@ public class CommandImport extends CommandBase {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+    public void processCommand(ICommandSender sender, String[] args) {
         if (args.length < 5) {
             try {
                 throw new WrongUsageException("/import <x> <y> <z> <name> <ignoreAir:true|false>");
@@ -49,7 +48,7 @@ public class CommandImport extends CommandBase {
             }
             BetterSchematic bs = BetterSchematic.genBetterSchematicFromFile(new File((File) FMLInjectionData.data()[6], "/Structures/" + args[3] + ".nbt"));
             bs.generateInWorld(sender.getEntityWorld(), new BlockPos(Integer.parseInt(args[0]), Integer.parseInt(args[1]), (Integer.parseInt(args[2]))), Boolean.parseBoolean(args[4]));
-            sender.addChatMessage(new TextComponentString("Imported Structure"));
+            sender.addChatMessage(new ChatComponentText("Imported Structure"));
         }
     }
 }

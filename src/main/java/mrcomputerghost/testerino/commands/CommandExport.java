@@ -5,8 +5,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
@@ -30,7 +29,7 @@ public class CommandExport extends CommandBase {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+    public void processCommand(ICommandSender sender, String[] args) {
         if (args.length < 7) {
             try {
                 throw new WrongUsageException("/export <x1> <y1> <z1> <x2> <y2> <z2> <name>");
@@ -65,9 +64,9 @@ public class CommandExport extends CommandBase {
             StructureBoundingBox box = new StructureBoundingBox(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]));
             BetterSchematic bs = BetterSchematic.genBetterSchematicFromWorld(sender.getEntityWorld(), box);
             if (bs.writeToFile(new File((File) FMLInjectionData.data()[6], "/Structures/" + args[6] + ".nbt"))) {
-                sender.addChatMessage(new TextComponentString("Exported Structure to: " + args[6] + ".nbt"));
+                sender.addChatMessage(new ChatComponentText("Exported Structure to: " + args[6] + ".nbt"));
             } else {
-                sender.addChatMessage(new TextComponentString("There was an error exporting the Structure"));
+                sender.addChatMessage(new ChatComponentText("There was an error exporting the Structure"));
             }
         }
     }

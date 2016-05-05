@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "Testerino",
+  "name": "Testerino",
+  "description": "A mod made for testing out new ideas.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["MrComputerGhost"],
+  "credits": "MrComputerGhost",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

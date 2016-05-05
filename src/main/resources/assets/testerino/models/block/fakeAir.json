@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "testerino:blocks/fake_air"
+  }
+}

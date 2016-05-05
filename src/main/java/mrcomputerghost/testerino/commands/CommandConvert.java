@@ -9,9 +9,8 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import java.io.File;
@@ -37,7 +36,7 @@ public class CommandConvert extends CommandBase {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+    public void processCommand(ICommandSender sender, String[] args) {
         BetterSchematic bs = null;
         File input = new File(args[0].replace("$mcDir", ((File) FMLInjectionData.data()[6]).getAbsolutePath()));
         if (!input.exists()) {
@@ -59,7 +58,7 @@ public class CommandConvert extends CommandBase {
                 List<Integer> newBlocks = new ArrayList<Integer>();
                 for (byte block : blocks) {
                     Block b = Block.getBlockById((int) block);
-                    String s = ForgeRegistries.BLOCKS.getKey(b).toString();
+                    String s = GameData.getBlockRegistry().getNameForObject(b).toString();
                     if (!nameID.contains(s)) {
                         nameID.add(s);
                     }
@@ -79,7 +78,7 @@ public class CommandConvert extends CommandBase {
                 e.printStackTrace();
                 return;
             }
-            sender.addChatMessage(new TextComponentString("Converted Schematic to Better Schematic"));
+            sender.addChatMessage(new ChatComponentText("Converted Schematic to Better Schematic"));
         }
     }
 

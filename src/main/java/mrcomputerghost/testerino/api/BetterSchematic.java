@@ -7,11 +7,11 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameData;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -52,7 +52,7 @@ public class BetterSchematic {
                 for (int x = box.minX; x <= box.maxX; ++x) {
                     BlockPos pos = new BlockPos(x, y, z);
                     metas.add(world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)));
-                    String s = ForgeRegistries.BLOCKS.getKey(world.getBlockState(pos).getBlock()).toString();
+                    String s = GameData.getBlockRegistry().getNameForObject(world.getBlockState(pos).getBlock()).toString();
                     if (!nameID.contains(s)) {
                         nameID.add(s);
                     }
@@ -141,7 +141,7 @@ public class BetterSchematic {
                             world.setBlockToAir(pos);
                         }
                     } else {
-                        Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(s[0], s[1]));
+                        Block block = GameData.getBlockRegistry().getObject(new ResourceLocation(s[0], s[1]));
                         IBlockState state = block.getStateFromMeta(meta[i]);
                         world.setBlockState(pos, state);
                     }
