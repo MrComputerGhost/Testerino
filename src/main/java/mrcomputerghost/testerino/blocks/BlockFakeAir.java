@@ -1,9 +1,7 @@
 package mrcomputerghost.testerino.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialTransparent;
 
 public class BlockFakeAir extends Block {
 
@@ -20,8 +18,7 @@ public class BlockFakeAir extends Block {
         return false;
     }
 
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 

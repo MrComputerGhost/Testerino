@@ -8,6 +8,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mrcomputerghost.testerino.blocks.TesterinoBlocks;
+import mrcomputerghost.testerino.commands.CommandBiomeId;
 import mrcomputerghost.testerino.commands.CommandConvert;
 import mrcomputerghost.testerino.commands.CommandExport;
 import mrcomputerghost.testerino.commands.CommandImport;
@@ -16,7 +17,7 @@ import mrcomputerghost.testerino.proxy.CommonProxy;
 import mrcomputerghost.testerino.world.gen.StructureGenerator;
 import mrcomputerghost.testerino.world.gen.structure.Structure;
 
-@Mod(modid = "Testerino", name = "Testerino", version = "0.04")
+@Mod(modid = "Testerino", name = "Testerino", version = "1.1")
 public class Testerino {
 
     @Mod.Instance
@@ -51,6 +52,7 @@ public class Testerino {
         event.registerServerCommand(new CommandExport());
         event.registerServerCommand(new CommandImport());
         event.registerServerCommand(new CommandConvert());
+        event.registerServerCommand(new CommandBiomeId());
     }
 
 }

@@ -12,13 +12,11 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CommandConvert extends CommandBase {
@@ -26,6 +24,10 @@ public class CommandConvert extends CommandBase {
     @Override
     public String getCommandName() {
         return "convert";
+    }
+
+    public int getRequiredPermissionLevel() {
+        return 2;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class CommandConvert extends CommandBase {
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
         BetterSchematic bs = null;
-        File input = new File(args[0].replace("$mcDir", ((File)FMLInjectionData.data()[6]).getAbsolutePath()));
+        File input = new File(args[0].replace("$mcDir", ((File) FMLInjectionData.data()[6]).getAbsolutePath()));
         if (!input.exists()) {
             throw new WrongUsageException("Make sure the file you are looking for exists!");
         } else {
@@ -64,10 +66,10 @@ public class CommandConvert extends CommandBase {
                 }
                 List<Integer> meta = new ArrayList<Integer>();
                 for (byte b : data) {
-                    meta.add((int)b);
+                    meta.add((int) b);
                 }
                 bs = new BetterSchematic(height, length, width, Ints.toArray(newBlocks), Ints.toArray(meta), key, tiles);
-                bs.writeToFile(new File(args[1].replace("$mcDir", ((File)FMLInjectionData.data()[6]).getAbsolutePath())));
+                bs.writeToFile(new File(args[1].replace("$mcDir", ((File) FMLInjectionData.data()[6]).getAbsolutePath())));
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
